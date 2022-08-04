@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "babel dong.js index.js component.js logic.js -d ./public && node server"
+    "serve": "babel dong.js index.js component.js logic.js -d ./public && node server.js"
   },
   "keywords": [],
   "author": "",

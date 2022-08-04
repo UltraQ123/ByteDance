@@ -52,15 +52,12 @@ class List extends Component {
     }
 
     handleItemRemove(edata) {
-        //if (typeof (this.props.id) == "undefined" || this.props.id == edata["listdel"]) {
         this.setState({
             list: this.state.list.filter((item, i) => i !== edata["index"])
         });
-        //}
     }
 
     handleAdd(edata) {
-        //if (typeof (this.props.id) == "undefined" || this.props.id == edata["listadd"]) {
         this.setState({
             list: [
                 ...this.state.list,
@@ -69,25 +66,31 @@ class List extends Component {
                 }
             ]
         });
-        //}
     }
 
     render() {
         return <div>
             <ul className="list">
                 {this.state.list.map((item, index) => {
-                    return <Item style={{ background: item.color, color: this.props.textColor }} onRemoveItem={() => {
-                        let tmp = { listdel: this.props.id, index: index };
-                        logicWorker.postMessage(JSON.stringify(tmp));
-                    }}>{item.text}</Item>
+                    return <Item
+                        style={{ background: item.color, color: this.props.textColor }}
+                        onRemoveItem={() => {
+                            let tmp = { listdel: this.props.id, index: index };
+                            logicWorker.postMessage(JSON.stringify(tmp));
+                        }}>
+                        {item.text}
+                    </Item>
                 })}
             </ul>
             <div>
                 <input ref={(ele) => { this.ref = ele }} />
-                <button onclick={() => {
-                    let tmp = { listadd: this.props.id, value: this.ref.value };
-                    logicWorker.postMessage(JSON.stringify(tmp));
-                }}>Add</button>
+                <button
+                    onclick={() => {
+                        let tmp = { listadd: this.props.id, value: this.ref.value };
+                        logicWorker.postMessage(JSON.stringify(tmp));
+                    }}>
+                    Add
+                </button>
             </div>
         </div>;
     }
@@ -109,5 +112,5 @@ if (typeof Worker !== "undefined") {
         }
     };
 } else {
-    alert("错误：你的浏览器不支持WebWorker?");
+    alert("错误：你的浏览器不支持WebWorker");
 }
