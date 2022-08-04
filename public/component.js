@@ -30,22 +30,6 @@ const ListDel = {
   }
 
 };
-const ViewShow = {
-  list: [],
-
-  //订阅
-  subscribe(func) {
-    this.list.push(func);
-  },
-
-  //发布
-  publish(arg) {
-    this.list.forEach(func => {
-      func && func(arg);
-    });
-  }
-
-};
 
 function Item(props) {
   return createElement("li", {
@@ -89,19 +73,17 @@ class List extends Component {
   }
 
   handleItemRemove(edata) {
-    //if (typeof (this.props.id) == "undefined" || this.props.id == edata["listdel"]) {
     this.setState({
       list: this.state.list.filter((item, i) => i !== edata["index"])
-    }); //}
+    });
   }
 
   handleAdd(edata) {
-    //if (typeof (this.props.id) == "undefined" || this.props.id == edata["listadd"]) {
     this.setState({
       list: [...this.state.list, {
         text: edata["value"]
       }]
-    }); //}
+    });
   }
 
   render() {
@@ -157,5 +139,5 @@ if (typeof Worker !== "undefined") {
     }
   };
 } else {
-  alert("错误：你的浏览器不支持WebWorker?");
+  alert("错误：你的浏览器不支持WebWorker");
 }

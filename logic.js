@@ -1,4 +1,3 @@
 onmessage = (e) => {
-    edata = JSON.parse(e.data);
-    postMessage(JSON.stringify(edata));
+    self.postMessage(JSON.stringify(JSON.parse(e.data)));
 }

@@ -97,13 +97,13 @@ class List extends Component {
 
 }
 
-var logicWorker;
+let logicWorker;
 if (typeof Worker !== "undefined") {
     if (typeof logicWorker == "undefined") {
         logicWorker = new Worker("logic.js");
     }
     logicWorker.onmessage = (e) => {
-        var edata = JSON.parse(e.data);
+        let edata = JSON.parse(e.data);
         if ("listdel" in edata) {
             ListDel.publish(edata);
         }
